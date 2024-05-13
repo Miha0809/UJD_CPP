@@ -1,8 +1,9 @@
+#include <cmath>
 #include <iostream>
 
 using namespace std;
 
-const int LENGTH = 15;
+const int LENGTH = 11;
 
 void init_array(int *numbers, int length) {
   for (int i = 0; i < length; i++) {
@@ -37,9 +38,36 @@ void task4(void) {
   print_array(numbers, LENGTH);
 }
 
+void reverse(int *numbers, int length) {
+  int end = length % 2 == 0 ? length / 2 - 1 : length / 2;
+
+  for (int i = 0; i < end; i++) {
+    int temp = numbers[end - i - 1];
+    numbers[end - i - 1] = numbers[i];
+    numbers[i] = temp;
+  }
+}
+
 void task6(void) {
   int numbers[LENGTH];
-  cout << LENGTH;
+
+  init_array(numbers, LENGTH);
+
+  int middle = floor(LENGTH / 2);
+
+  if (LENGTH % 2 != 0) {
+    cout << numbers[middle] << endl << middle << endl;
+  } else {
+    cout << numbers[middle - 1] << ", " << numbers[middle] << endl;
+  }
+
+  cout << "BEFORE" << endl;
+  print_array(numbers, LENGTH);
+
+  reverse(numbers, LENGTH);
+
+  cout << endl << "AFTER" << endl;
+  print_array(numbers, LENGTH);
 }
 
 void task7(void) {
@@ -66,6 +94,12 @@ void task7(void) {
       count3++;
     }
   }
+
+  cout << "count event: " << countEvent << endl;
+  cout << "suma event: " << sumaEvent << endl;
+  cout << "count not event: " << countNotEvent << endl;
+  cout << "suma not event: " << sumaNotEvent << endl;
+  cout << "count numbers % 3: " << count3 << endl;
 }
 
 int main(void) {
@@ -73,6 +107,9 @@ int main(void) {
 
   cout << "Task4!" << endl;
   task4();
+
+  cout << "Task6!" << endl;
+  task6();
 
   cout << "Task7!" << endl;
   task7();
