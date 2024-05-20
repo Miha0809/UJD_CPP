@@ -102,6 +102,86 @@ void task7(void) {
   cout << "count numbers % 3: " << count3 << endl;
 }
 
+void drawWithRepetition(void) {
+  int result[6];
+
+  for (int i = 0; i < 6; ++i) {
+    result[i] = rand() % 49 + 1;
+  }
+
+  cout << "6 out of 49 (with repetitions): ";
+
+  for (int i = 0; i < 6; ++i) {
+    cout << result[i] << " ";
+  }
+
+  cout << endl;
+}
+void drawWithRepetitionNoAdjacent(void) {
+  int result[6];
+  result[0] = rand() % 49 + 1;
+
+  for (int i = 1; i < 6; ++i) {
+    int newNum;
+
+    do {
+      newNum = rand() % 49 + 1;
+    } while (newNum == result[i - 1]);
+
+    result[i] = newNum;
+  }
+
+  cout << "6 out of 49 (with repetitions but not adjacent): ";
+
+  for (int i = 0; i < 6; ++i) {
+    cout << result[i] << " ";
+  }
+
+  cout << endl;
+}
+void drawWithoutRepetition(void) {
+  int numbers[49];
+
+  for (int i = 0; i < 49; ++i) {
+    numbers[i] = i + 1;
+  }
+
+  for (int i = 48; i > 0; --i) {
+    int random = rand() % (i + 1);
+    int temp = numbers[i];
+    numbers[i] = numbers[random];
+    numbers[random] = temp;
+  }
+
+  cout << "6 out of 49 (without repetitions): ";
+
+  for (int i = 0; i < 6; ++i) {
+    cout << numbers[i] << " ";
+  }
+
+  cout << endl;
+}
+void task8(void) {
+  drawWithRepetition();
+  drawWithRepetitionNoAdjacent();
+  drawWithoutRepetition();
+}
+
+bool XOR(int a, int b) { return (a & ~b) | (~a & b); }
+void task9(void) {
+  const int length = 100;
+  int numbers[length];
+  init_array(numbers, length);
+
+  for (int i = 0; i < length; i++) {
+    int random1 = rand() % (i + 1);
+    int random2 = rand() % (i + 1);
+
+    cout << "XOR for " << numbers[random1] << " and for " << numbers[random2]
+         << ": " << XOR(numbers[random1], numbers[random2]) << endl;
+  }
+}
+
 int main(void) {
   srand(time(NULL));
 
@@ -113,4 +193,10 @@ int main(void) {
 
   cout << "Task7!" << endl;
   task7();
+
+  cout << "Task8!" << endl;
+  task8();
+
+  cout << "Task9!" << endl;
+  task9();
 }
