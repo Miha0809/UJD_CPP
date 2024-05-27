@@ -225,6 +225,45 @@ void task13(void) {
   int numbers[LENGTH][LENGTH];
 
   init_array2d(numbers, 100, LENGTH);
+
+  for (int i = 0; i < LENGTH; i++) {
+    numbers[i][i] = i;
+  }
+
+  print_array2d(numbers);
+}
+
+void task14(void) {
+  int numbers[LENGTH][LENGTH];
+
+  init_array2d(numbers, 100, LENGTH);
+
+  for (int i = LENGTH - 1, j = 0; i >= 0; i--, j++) {
+    numbers[j][i] = i;
+  }
+
+  print_array2d(numbers);
+}
+
+void task15(void) {
+  int numbers[LENGTH][LENGTH];
+
+  init_array2d(numbers, 10, LENGTH);
+
+  cout << "Before" << endl;
+  print_array2d(numbers);
+
+  for (int i = 0; i < LENGTH; i++) {
+    for (int j = 2; j < LENGTH; j++) {
+      int temp = numbers[i][j];
+      numbers[i][j] = char(178);
+    }
+
+    numbers[i][0] = i;
+    numbers[i][1] = pow(numbers[i][1], 2);
+  }
+
+  cout << endl << "After" << endl;
   print_array2d(numbers);
 }
 
@@ -276,6 +315,12 @@ int main(void) {
 
   cout << "Task13!" << endl;
   task13();
+
+  cout << "Task14!" << endl;
+  task14();
+
+  cout << "Task15!" << endl;
+  task15();
 
   cout << "Task18!" << endl;
   task18();
