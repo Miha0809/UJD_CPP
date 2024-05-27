@@ -3,16 +3,16 @@
 
 using namespace std;
 
-const int LENGTH = 11;
+const int LENGTH = 10;
 
-void init_array(int *numbers, int length) {
+void init_array(int *numbers, int range = 1000, int length = LENGTH) {
   for (int i = 0; i < length; i++) {
-    int random = rand() % 1000;
+    int random = rand() % range;
     numbers[i] = random;
   }
 }
 
-void print_array(int *numbers, int length) {
+void print_array(int *numbers, int length = LENGTH) {
   for (int i = 0; i < length; i++) {
     cout << numbers[i] << " ";
   }
@@ -182,6 +182,77 @@ void task9(void) {
   }
 }
 
+void init_array2d(int numbers[LENGTH][LENGTH], int range = 1000,
+                  int firstLength = LENGTH, int secondLength = LENGTH) {
+  for (int i = 0; i < firstLength; i++) {
+    for (int j = 0; j < secondLength; j++) {
+      int random = rand() % range;
+      numbers[i][j] = random;
+    }
+  }
+}
+
+void print_array2d(int numbers[LENGTH][LENGTH], int firstLength = LENGTH,
+                   int secondLength = LENGTH) {
+  for (int i = 0; i < firstLength; i++) {
+    for (int j = 0; j < secondLength; j++) {
+      cout << numbers[i][j] << " ";
+    }
+    cout << endl;
+  }
+}
+
+void task12a(void) {
+  int array1[LENGTH][LENGTH];
+  int array2[LENGTH][LENGTH];
+
+  init_array2d(array1);
+
+  cout << "First array: " << endl;
+  print_array2d(array1);
+
+  for (int i = 0; i < LENGTH; i++) {
+    for (int j = 0; j < LENGTH; j++) {
+      array2[i][j] = array1[j][i];
+    }
+  }
+
+  cout << endl << "Second array: " << endl;
+  print_array2d(array2);
+}
+
+void task13(void) {
+  int numbers[LENGTH][LENGTH];
+
+  init_array2d(numbers, 100, LENGTH);
+  print_array2d(numbers);
+}
+
+void task18(void) {
+  int numbers[LENGTH][LENGTH][LENGTH];
+
+  for (int i = 0; i < LENGTH; i++) {
+    for (int j = 0; j < LENGTH; j++) {
+      for (int k = 0; k < LENGTH; k++) {
+        int random = rand() % 100;
+        numbers[i][j][k] = random;
+      }
+    }
+  }
+
+  for (int i = 0; i < LENGTH; i++) {
+    for (int j = 0; j < LENGTH; j++) {
+      for (int k = 0; k < LENGTH; k++) {
+        cout << numbers[i][j][k] << " ";
+      }
+
+      cout << endl;
+    }
+
+    cout << endl;
+  }
+}
+
 int main(void) {
   srand(time(NULL));
 
@@ -199,4 +270,13 @@ int main(void) {
 
   cout << "Task9!" << endl;
   task9();
+
+  cout << "Task12a!" << endl;
+  task12a();
+
+  cout << "Task13!" << endl;
+  task13();
+
+  cout << "Task18!" << endl;
+  task18();
 }
