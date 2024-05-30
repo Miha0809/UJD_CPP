@@ -1,4 +1,5 @@
 #include <cmath>
+#include <cstring>
 #include <iostream>
 
 using namespace std;
@@ -292,6 +293,55 @@ void task18(void) {
   }
 }
 
+void removeCharacter(char *str, char charToRemove) {
+  int length = strlen(str);
+  int j = 0;
+
+  for (int i = 0; i < length; i++) {
+    if (str[i] != charToRemove) {
+      str[j++] = str[i];
+    }
+  }
+
+  str[j] = '\0';
+}
+void task20(void) {
+  char str[] = "hello world";
+  char charToRemove = 'l';
+
+  cout << "Original string: " << str << endl;
+
+  removeCharacter(str, charToRemove);
+  cout << "String after removing '" << charToRemove << "': " << str << endl;
+}
+
+void appendString(char *destination, const char *source,
+                  size_t destinationCapacity) {
+  int destLen = strlen(destination);
+  int sourceLen = strlen(source);
+
+  if (destLen + sourceLen + 1 > destinationCapacity) {
+    cout << "Error: Not enough space in destination array." << endl;
+    return;
+  }
+
+  for (int i = 0; i <= sourceLen; ++i) {
+    destination[destLen + i] = source[i];
+  }
+}
+void task21(void) {
+  const int destinationCapacity = 50;
+  char destination[destinationCapacity] = "Hello";
+  const char *source = " World!";
+
+  cout << "Original destination: " << destination << endl;
+  cout << "Source: " << source << endl;
+
+  appendString(destination, source, destinationCapacity);
+
+  cout << "After appending: " << destination << endl;
+}
+
 int main(void) {
   srand(time(NULL));
 
@@ -324,4 +374,10 @@ int main(void) {
 
   cout << "Task18!" << endl;
   task18();
+
+  cout << "Task20!" << endl;
+  task20();
+
+  cout << "Task21!" << endl;
+  task21();
 }
