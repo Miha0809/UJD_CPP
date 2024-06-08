@@ -200,6 +200,55 @@ void task6(void) {
   }
 }
 
+// Task7
+
+union MixedData {
+public:
+  int intValue1;
+  float floatValue;
+  int intValue2;
+  char charValue;
+};
+
+void task7(void) {
+  MixedData data;
+
+  cout << "Enter an integer for intValue1: ";
+  cin >> data.intValue1;
+  cout << "Values after setting intValue1:\n";
+  cout << "intValue1: " << data.intValue1 << endl;
+  cout << "floatValue: " << data.floatValue << endl;
+  cout << "intValue2: " << data.intValue2 << endl;
+  cout << "charValue: " << data.charValue << endl;
+  cout << endl;
+
+  cout << "Enter a float for floatValue: ";
+  cin >> data.floatValue;
+  cout << "Values after setting floatValue:\n";
+  cout << "intValue1: " << data.intValue1 << endl;
+  cout << "floatValue: " << data.floatValue << endl;
+  cout << "intValue2: " << data.intValue2 << endl;
+  cout << "charValue: " << data.charValue << endl;
+  cout << endl;
+
+  cout << "Enter an integer for intValue2: ";
+  cin >> data.intValue2;
+  cout << "Values after setting intValue2:\n";
+  cout << "intValue1: " << data.intValue1 << endl;
+  cout << "floatValue: " << data.floatValue << endl;
+  cout << "intValue2: " << data.intValue2 << endl;
+  cout << "charValue: " << data.charValue << endl;
+  cout << endl;
+
+  cout << "Enter a character for charValue: ";
+  cin >> data.charValue;
+  cout << "Values after setting charValue:\n";
+  cout << "intValue1: " << data.intValue1 << endl;
+  cout << "floatValue: " << data.floatValue << endl;
+  cout << "intValue2: " << data.intValue2 << endl;
+  cout << "charValue: " << data.charValue << endl;
+}
+
 int main(void) {
   cout << "Task1!" << endl;
   task1();
@@ -218,6 +267,9 @@ int main(void) {
 
   cout << "Task6!" << endl;
   task6();
+
+  cout << "Task7!" << endl;
+  task7();
 
   return 0;
 }
