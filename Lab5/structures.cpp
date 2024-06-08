@@ -47,9 +47,39 @@ void task1(void) {
        << ", " << normalized.y2 << ")" << endl;
 }
 
+// Task2
+
+struct Triangle {
+public:
+  double side1;
+  double side2;
+  double side3;
+};
+
+double calculatePerimeter(Triangle t) { return t.side1 + t.side2 + t.side3; }
+
+void task2(void) {
+  Triangle triangle;
+
+  cout << "Enter the length of the 1 side of the triangle: ";
+  cin >> triangle.side1;
+
+  cout << "Enter the length of the 2 side of the triangle: ";
+  cin >> triangle.side2;
+
+  cout << "Enter the length of the 3 side of the triangle: ";
+  cin >> triangle.side3;
+
+  double perimeter = calculatePerimeter(triangle);
+  cout << "The perimeter of the triangle is: " << perimeter << endl;
+}
+
 int main(void) {
   cout << "Task1!" << endl;
   task1();
+
+  cout << "Task2!" << endl;
+  task2();
 
   return 0;
 }
