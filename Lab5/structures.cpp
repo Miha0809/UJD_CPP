@@ -139,6 +139,33 @@ void task3(void) {
   cout << "String: " << data.str << endl;
 }
 
+// Task4
+
+struct NetworkInfo {
+public:
+  bool inRange : 1;
+  unsigned int mask : 32;
+  unsigned int ipAddress : 32;
+};
+
+void task4(void) {
+  NetworkInfo info;
+  info.inRange = (7 >= -3 && 7 < 7) || (7 >= 7 && 7 < 21);
+
+  cout << "Is 7 within the ranges <-3..7) or <7..21>: "
+       << (info.inRange ? "Yes" : "No") << endl;
+
+  // 2- Set the IP address mask to 24 bits, provide the subnet number and host
+  // for the IP address 192.168.0.130 using hexadecimal notation
+  info.mask = 0xFFFFFF00;      // Mask: 255.255.255.0 (24 bits)
+  info.ipAddress = 0xC0A80082; // IP Address: 192.168.0.130
+
+  unsigned int subnet = info.ipAddress & info.mask;
+  unsigned int host = info.ipAddress & ~info.mask;
+
+  cout << "Subnet: " << hex << subnet << ", Host: " << host << endl;
+}
+
 int main(void) {
   cout << "Task1!" << endl;
   task1();
@@ -148,6 +175,9 @@ int main(void) {
 
   cout << "Task3!" << endl;
   task3();
+
+  cout << "Task4!" << endl;
+  task4();
 
   return 0;
 }
