@@ -166,6 +166,23 @@ void task4(void) {
   cout << "Subnet: " << hex << subnet << ", Host: " << host << endl;
 }
 
+// Task5
+
+union IntToBytes {
+public:
+  int integerValue;
+  unsigned char byteValue[4];
+};
+
+void task5(void) {
+  IntToBytes data;
+  data.integerValue = 16909060;
+
+  for (int i = 0; i < 4; i++) {
+    cout << "Byte " << i + 1 << ": " << (int)data.byteValue[i] << endl;
+  }
+}
+
 int main(void) {
   cout << "Task1!" << endl;
   task1();
@@ -178,6 +195,9 @@ int main(void) {
 
   cout << "Task4!" << endl;
   task4();
+
+  cout << "Task5!" << endl;
+  task5();
 
   return 0;
 }
