@@ -183,6 +183,23 @@ void task5(void) {
   }
 }
 
+// Task6
+
+union IntToCharArray {
+public:
+  unsigned short int shortValue[2];
+  char charArray[4];
+};
+
+void task6(void) {
+  IntToCharArray data;
+  data.shortValue[0] = 65;
+
+  for (int i = 0; i < 4; i++) {
+    cout << "Byte " << i + 1 << ": " << (int)data.charArray[i] << endl;
+  }
+}
+
 int main(void) {
   cout << "Task1!" << endl;
   task1();
@@ -198,6 +215,9 @@ int main(void) {
 
   cout << "Task5!" << endl;
   task5();
+
+  cout << "Task6!" << endl;
+  task6();
 
   return 0;
 }
