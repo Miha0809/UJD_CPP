@@ -194,6 +194,24 @@ void task8(void) {
   cout << "C-style text: " << cStyleText << endl;
 }
 
+void task9(void) {
+  int num;
+
+  cout << "Enter a number: ";
+  cin >> num;
+
+  cout << "Address of variable 'num': " << &num << endl;
+
+  for (int i = 0; i < 5; ++i) {
+    int *dynamicNum = new int;
+    *dynamicNum = i;
+
+    cout << "Address of dynamically allocated variable: " << dynamicNum << endl;
+
+    delete dynamicNum;
+  }
+}
+
 int main(void) {
   cout << "Task1!" << endl;
   task1();
@@ -218,6 +236,9 @@ int main(void) {
 
   cout << "Task8!" << endl;
   task8();
+
+  cout << "Task9!" << endl;
+  task9();
 
   return 0;
 }
