@@ -97,6 +97,50 @@ void task4(void) {
   cout << *&m << endl;
 }
 
+void task5(void) {
+  int a[][2] = {{1, 2}, {3, 4}, {5, 6}, {7, 8}, {9, 10}, {11, 12}};
+  char b[2][20] = {"Poniedzialek", "Wtorek"};
+  char znaki[] = "Programowanie";
+
+  cout << "Array 'a' using indexing:" << endl;
+  for (int i = 0; i < 6; ++i) {
+    for (int j = 0; j < 2; ++j) {
+      cout << a[i][j] << " ";
+    }
+    cout << endl;
+  }
+
+  cout << "\nArray 'a' using pointers:" << endl;
+  for (int i = 0; i < 6; ++i) {
+    for (int j = 0; j < 2; ++j) {
+      cout << *(*(a + i) + j) << " ";
+    }
+    cout << endl;
+  }
+
+  cout << "\nArray 'b' using indexing:" << endl;
+  for (int i = 0; i < 2; ++i) {
+    cout << b[i] << endl;
+  }
+
+  cout << "\nArray 'b' using pointers:" << endl;
+  for (int i = 0; i < 2; ++i) {
+    cout << *(b + i) << endl;
+  }
+
+  cout << "\nArray 'znaki' using indexing:" << endl;
+  for (int i = 0; znaki[i] != '\0'; ++i) {
+    cout << znaki[i];
+  }
+  cout << endl;
+
+  cout << "\nArray 'znaki' using pointers:" << endl;
+  for (char *ptr = znaki; *ptr != '\0'; ++ptr) {
+    cout << *ptr;
+  }
+  cout << endl;
+}
+
 int main(void) {
   cout << "Task1!" << endl;
   task1();
@@ -109,6 +153,9 @@ int main(void) {
 
   cout << "Task4!" << endl;
   task4();
+
+  cout << "Task5!" << endl;
+  task5();
 
   return 0;
 }
