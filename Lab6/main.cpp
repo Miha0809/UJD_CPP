@@ -1,3 +1,4 @@
+#include <cstring>
 #include <iostream>
 
 using namespace std;
@@ -50,6 +51,39 @@ void task1(void) {
   cout << "\n";
 }
 
+void task2(void) {
+  char *charPtr = new char[10];
+  int *intPtr = new int[3];
+
+  cout << "Contents of the first memory area (char): " << charPtr << endl;
+
+  cout << "Contents of the second memory area (int): ";
+
+  for (int i = 0; i < 3; ++i) {
+    cout << intPtr[i] << " ";
+  }
+  cout << endl;
+
+  strcpy(charPtr, "Microsoft");
+
+  cout << "Contents of the first memory area after writing 'Microsoft': "
+       << charPtr << endl;
+
+  intPtr[0] = 10;
+  intPtr[1] = 20;
+  intPtr[2] = 30;
+
+  cout << "Contents of the second memory area after writing values: ";
+
+  for (int i = 0; i < 3; ++i) {
+    cout << intPtr[i] << " ";
+  }
+  cout << endl;
+
+  delete[] charPtr;
+  delete[] intPtr;
+}
+
 void task3(void) {
   char tab[10] = "Cisco";
 
@@ -66,6 +100,9 @@ void task4(void) {
 int main(void) {
   cout << "Task1!" << endl;
   task1();
+
+  cout << "Task2!" << endl;
+  task2();
 
   cout << "Task3!" << endl;
   task3();
