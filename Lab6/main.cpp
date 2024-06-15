@@ -172,6 +172,28 @@ void task7(void) {
   cout << "y: " << y << endl;
 }
 
+void task8(void) {
+  // C
+  char staticText[256] = "This is a static long text in C.";
+  printf("Static text: %s\n", staticText);
+
+  char *dynamicText = (char *)malloc(256 * sizeof(char));
+  if (dynamicText != NULL) {
+    strcpy(dynamicText, "This is a dynamically allocated long text in C.");
+    printf("Dynamic text: %s\n", dynamicText);
+    free(dynamicText); // Freeing the allocated memory
+  } else {
+    printf("Memory allocation failed.\n");
+  }
+
+  // C++
+  string longText = "This is a long text stored in a std::string in C++.";
+  cout << "Long text: " << longText << endl;
+
+  char cStyleText[256] = "This is a C-style char array in C++.";
+  cout << "C-style text: " << cStyleText << endl;
+}
+
 int main(void) {
   cout << "Task1!" << endl;
   task1();
@@ -193,6 +215,9 @@ int main(void) {
 
   cout << "Task7!" << endl;
   task7();
+
+  cout << "Task8!" << endl;
+  task8();
 
   return 0;
 }
