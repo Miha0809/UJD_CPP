@@ -341,7 +341,77 @@ void task25Cpp(void) {
   delete[] ptr;
 }
 
-int main(void) {
+void task26(void) {
+  int *ptr1;
+  int *ptr2 = nullptr;
+
+  cout << "Address of ptr1 (uninitialized): " << ptr1 << endl;
+  cout << "Address of ptr2 (initialized with nullptr): " << ptr2 << endl;
+
+  cout << "Contents of *ptr1: " << *ptr1 << endl;
+  cout << "Contents of *ptr2: " << *ptr2 << endl;
+
+  int num1 = 10;
+  int num2 = 20;
+  ptr1 = &num1;
+  ptr2 = &num2;
+
+  cout << "\nAddress of ptr1 (after initialization): " << ptr1 << endl;
+  cout << "Address of ptr2 (after initialization): " << ptr2 << endl;
+  cout << "Contents of *ptr1: " << *ptr1 << endl;
+  cout << "Contents of *ptr2: " << *ptr2 << endl;
+  cout << "\nAddress of ptr1 (after deallocation): " << ptr1 << endl;
+  cout << "Address of ptr2 (after deallocation): " << ptr2 << endl;
+  cout << "Contents of *ptr1 (after deallocation): " << *ptr1 << endl;
+  cout << "Contents of *ptr2 (after deallocation): " << *ptr2 << endl;
+}
+
+void task27(int argc, char **argv) {
+  cout << "Zawartość tablicy argumentów (traktowana jako wskaźnik do znaków):"
+       << endl;
+  for (int i = 0; i < argc; ++i) {
+    cout << "Argument " << i << ": " << argv[i] << endl;
+  }
+}
+
+void task29(void) {
+  int size;
+  char userChar;
+
+  do {
+    cout << "Enter a positive integer for the array size: ";
+    cin >> size;
+  } while (size <= 0);
+
+  cout << "Enter one character: ";
+  cin >> userChar;
+
+  char *arr = new char[size + 1];
+
+  srand(time(nullptr));
+
+  for (int i = 0; i < size; ++i) {
+    arr[i] = 'a' + rand() % ('Z' - 'a' + 1);
+  }
+  arr[size] = '\0';
+
+  cout << "Generated array of size " << size
+       << " with random characters: " << arr << endl;
+
+  int count = 0;
+  for (int i = 0; i < size; ++i) {
+    if (arr[i] == userChar) {
+      count++;
+    }
+  }
+
+  cout << "Number of occurrences of '" << userChar
+       << "' in the array: " << count << endl;
+
+  delete[] arr;
+}
+
+int main(int argc, char **argv) {
   cout << endl << "Task1!" << endl;
   task1();
 
@@ -380,6 +450,15 @@ int main(void) {
 
   cout << endl << "Task25 for C++!" << endl;
   task25Cpp();
+
+  cout << endl << "Task26!" << endl;
+  // task26();
+
+  cout << endl << "Task28!" << endl;
+  task27(argc, argv);
+
+  cout << endl << "Task29!" << endl;
+  task29();
 
   return 0;
 }
