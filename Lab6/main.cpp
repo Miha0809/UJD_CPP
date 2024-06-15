@@ -212,6 +212,36 @@ void task9(void) {
   }
 }
 
+void swap(int *a, int *b) {
+  int temp = *a;
+  *a = *b;
+  *b = temp;
+}
+void task10(void) {
+  int a, b;
+
+  cout << "Enter the first number: ";
+  cin >> a;
+  cout << "Enter the second number: ";
+  cin >> b;
+
+  cout << "Before swapping: a = " << a << ", b = " << b << endl;
+
+  swap(&a, &b);
+
+  cout << "After swapping: a = " << a << ", b = " << b << endl;
+
+  int arr[2] = {a, b};
+
+  cout << "Array before swapping: arr[0] = " << arr[0]
+       << ", arr[1] = " << arr[1] << endl;
+
+  swap(&arr[0], &arr[1]);
+
+  cout << "Array after swapping: arr[0] = " << arr[0] << ", arr[1] = " << arr[1]
+       << endl;
+}
+
 int main(void) {
   cout << "Task1!" << endl;
   task1();
@@ -239,6 +269,9 @@ int main(void) {
 
   cout << "Task9!" << endl;
   task9();
+
+  cout << "Task10!" << endl;
+  task10();
 
   return 0;
 }
