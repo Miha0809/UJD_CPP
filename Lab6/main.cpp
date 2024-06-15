@@ -141,6 +141,27 @@ void task5(void) {
   cout << endl;
 }
 
+void task6(void) {
+  char imie[6] =
+      "Pawel"; // Poprawienie wielkości tablicy, aby pomieścić "Pawel" i '\0'
+  int *wsk = nullptr; // Inicjalizacja wskaźnika jako nullptr
+  float podatek;
+  char napis[124];
+  int licznik = 5;
+  int x, y, z;
+  x = y = z = 3; // Poprawne przypisanie wartości do zmiennych x, y i z
+
+  wsk = new int; // Alokacja pamięci dla wskaźnika
+  *wsk = 35;
+  licznik = 1;
+  // podatek = "23%";  // To przypisanie jest błędne, więc je usuwamy
+  podatek =
+      0.23; // Przykładowe poprawne przypisanie wartości do zmiennej podatek
+  cout << *wsk << endl; // Poprawne użycie wskaźnika do wyświetlenia wartości
+
+  delete wsk; // Zwolnienie pamięci przydzielonej wskaźnikowi
+}
+
 int main(void) {
   cout << "Task1!" << endl;
   task1();
@@ -156,6 +177,9 @@ int main(void) {
 
   cout << "Task5!" << endl;
   task5();
+
+  cout << "Task6!" << endl;
+  task6();
 
   return 0;
 }
