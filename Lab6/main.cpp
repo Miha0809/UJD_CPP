@@ -162,6 +162,16 @@ void task6(void) {
   delete wsk; // Zwolnienie pamięci przydzielonej wskaźnikowi
 }
 
+void task7(void) {
+  char x[2] = "z"; // Poprawiono rozmiar tablicy
+  char z[2] = "a"; // Użyto cudzysłowów do przypisania ciągu znaków
+  char y = 'z';    // Użyto apostrofów do przypisania pojedynczego znaku
+
+  cout << "x: " << x << endl;
+  cout << "z: " << z << endl;
+  cout << "y: " << y << endl;
+}
+
 int main(void) {
   cout << "Task1!" << endl;
   task1();
@@ -180,6 +190,9 @@ int main(void) {
 
   cout << "Task6!" << endl;
   task6();
+
+  cout << "Task7!" << endl;
+  task7();
 
   return 0;
 }
