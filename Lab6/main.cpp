@@ -242,6 +242,22 @@ void task10(void) {
        << endl;
 }
 
+void task11(void) {
+  int arr[5] = {0};
+  int *ptr = arr;
+  int(*ptrArr)[5] = &arr;
+
+  arr[0] = 1;
+  *(ptr + 1) = 2;
+  *(*ptrArr + 2) = 3;
+
+  cout << "Zawartość tablicy:" << endl;
+  for (int i = 0; i < 5; ++i) {
+    cout << arr[i] << " ";
+  }
+  cout << endl;
+}
+
 int main(void) {
   cout << "Task1!" << endl;
   task1();
@@ -272,6 +288,9 @@ int main(void) {
 
   cout << "Task10!" << endl;
   task10();
+
+  cout << "Task11!" << endl;
+  task11();
 
   return 0;
 }
