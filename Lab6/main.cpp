@@ -141,7 +141,7 @@ void task5(void) {
   cout << endl;
 }
 
-void task6(void) {
+void task7(void) {
   char imie[6] =
       "Pawel"; // Poprawienie wielkości tablicy, aby pomieścić "Pawel" i '\0'
   int *wsk = nullptr; // Inicjalizacja wskaźnika jako nullptr
@@ -162,7 +162,7 @@ void task6(void) {
   delete wsk; // Zwolnienie pamięci przydzielonej wskaźnikowi
 }
 
-void task7(void) {
+void task8(void) {
   char x[2] = "z"; // Poprawiono rozmiar tablicy
   char z[2] = "a"; // Użyto cudzysłowów do przypisania ciągu znaków
   char y = 'z';    // Użyto apostrofów do przypisania pojedynczego znaku
@@ -172,7 +172,7 @@ void task7(void) {
   cout << "y: " << y << endl;
 }
 
-void task8(void) {
+void task9(void) {
   // C
   char staticText[256] = "This is a static long text in C.";
   printf("Static text: %s\n", staticText);
@@ -194,7 +194,7 @@ void task8(void) {
   cout << "C-style text: " << cStyleText << endl;
 }
 
-void task9(void) {
+void task10(void) {
   int num;
 
   cout << "Enter a number: ";
@@ -217,7 +217,7 @@ void swap(int *a, int *b) {
   *a = *b;
   *b = temp;
 }
-void task10(void) {
+void task22(void) {
   int a, b;
 
   cout << "Enter the first number: ";
@@ -242,7 +242,7 @@ void task10(void) {
        << endl;
 }
 
-void task11(void) {
+void task23(void) {
   int arr[5] = {0};
   int *ptr = arr;
   int(*ptrArr)[5] = &arr;
@@ -258,39 +258,128 @@ void task11(void) {
   cout << endl;
 }
 
+void task25C(void) {
+  int arr[5] = {1, 2, 3, 4, 5};
+
+  int *ptr = (int *)malloc(5 * sizeof(int));
+  if (ptr == NULL) {
+    printf("Błąd alokacji pamięci.\n");
+    return;
+  }
+
+  printf("Zawartość tablicy arr:\n");
+  for (int i = 0; i < 5; ++i) {
+    printf("%d ", arr[i]);
+  }
+  printf("\n");
+
+  printf("Zawartość zaalokowanego obszaru pamięci:\n");
+  for (int i = 0; i < 5; ++i) {
+    printf("%d ", ptr[i]);
+  }
+  printf("\n");
+
+  for (int i = 0; i < 5; ++i) {
+    ptr[i] = arr[i];
+  }
+
+  printf("Zawartość zaalokowanego obszaru pamięci po przepisaniu:\n");
+  for (int i = 0; i < 5; ++i) {
+    printf("%d ", ptr[i]);
+  }
+  printf("\n");
+
+  for (int i = 0; i < 5; ++i) {
+    ptr[i] += 1;
+  }
+
+  printf("Zawartość zaalokowanego obszaru pamięci po zwiększeniu o 1:\n");
+  for (int i = 0; i < 5; ++i) {
+    printf("%d ", ptr[i]);
+  }
+  printf("\n");
+
+  free(ptr);
+}
+
+void task25Cpp(void) {
+  int arr[5] = {1, 2, 3, 4, 5};
+  int *ptr = new int[5];
+
+  cout << "Zawartość tablicy arr:" << endl;
+  for (int i = 0; i < 5; ++i) {
+    cout << arr[i] << " ";
+  }
+  cout << endl;
+
+  cout << "Zawartość zaalokowanego obszaru pamięci:" << endl;
+  for (int i = 0; i < 5; ++i) {
+    cout << ptr[i] << " ";
+  }
+  cout << endl;
+
+  for (int i = 0; i < 5; ++i) {
+    ptr[i] = arr[i];
+  }
+
+  cout << "Zawartość zaalokowanego obszaru pamięci po przepisaniu:" << endl;
+  for (int i = 0; i < 5; ++i) {
+    cout << ptr[i] << " ";
+  }
+  cout << endl;
+
+  for (int i = 0; i < 5; ++i) {
+    ptr[i] += 1;
+  }
+
+  cout << "Zawartość zaalokowanego obszaru pamięci po zwiększeniu o 1:" << endl;
+  for (int i = 0; i < 5; ++i) {
+    cout << ptr[i] << " ";
+  }
+  cout << endl;
+
+  delete[] ptr;
+}
+
 int main(void) {
-  cout << "Task1!" << endl;
+  cout << endl << "Task1!" << endl;
   task1();
 
-  cout << "Task2!" << endl;
+  cout << endl << "Task2!" << endl;
   task2();
 
-  cout << "Task3!" << endl;
+  cout << endl << "Task3!" << endl;
   task3();
 
-  cout << "Task4!" << endl;
+  cout << endl << "Task4!" << endl;
   task4();
 
-  cout << "Task5!" << endl;
+  cout << endl << "Task5!" << endl;
   task5();
 
-  cout << "Task6!" << endl;
-  task6();
-
-  cout << "Task7!" << endl;
+  cout << endl << "Task7!" << endl;
   task7();
 
-  cout << "Task8!" << endl;
+  cout << endl << "Task8!" << endl;
   task8();
 
-  cout << "Task9!" << endl;
+  cout << endl << "Task9!" << endl;
   task9();
 
-  cout << "Task10!" << endl;
+  cout << endl << "Task10!" << endl;
   task10();
 
-  cout << "Task11!" << endl;
-  task11();
+  cout << endl << "Task22!" << endl;
+  task22();
+
+  cout << endl << "Task23!" << endl;
+  task23();
+
+  cout << endl << "Task25 for C!" << endl;
+  task25C();
+
+  cout << endl << "Task25 for C++!" << endl;
+  task25Cpp();
 
   return 0;
 }
