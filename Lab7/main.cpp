@@ -96,6 +96,55 @@ void task6a(void) {
   printIPAddress(networkAddress);
 }
 
+int calculateArea(int side) { return side * side; }
+double calculateArea(double length, double width) { return length * width; }
+double calculateVolume(double length, double width = 1.0, double height = 1.0) {
+  return length * width * height;
+}
+void task7(void) {
+  int choice;
+  cout << "Choose an option:\n";
+  cout << "1. Area of a square\n";
+  cout << "2. Area of a rectangle\n";
+  cout << "3. Volume of a cube\n";
+  cout << "Your choice: ";
+  cin >> choice;
+
+  switch (choice) {
+  case 1: {
+    int side;
+    cout << "Enter the side length of the square: ";
+    cin >> side;
+    cout << "The area of the square is: " << calculateArea(side) << endl;
+    break;
+  }
+  case 2: {
+    double length, width;
+    cout << "Enter the length of the rectangle: ";
+    cin >> length;
+    cout << "Enter the width of the rectangle: ";
+    cin >> width;
+    cout << "The area of the rectangle is: " << calculateArea(length, width)
+         << endl;
+    break;
+  }
+  case 3: {
+    double length, width, height;
+    cout << "Enter the length of the cube: ";
+    cin >> length;
+    cout << "Enter the width of the cube (default is 1): ";
+    cin >> width;
+    cout << "Enter the height of the cube (default is 1): ";
+    cin >> height;
+    cout << "The volume of the cube is: "
+         << calculateVolume(length, width, height) << endl;
+    break;
+  }
+  default:
+    cout << "Invalid choice. Please try again." << endl;
+  }
+}
+
 int main(void) {
   cout << endl << "Task4!" << endl;
   task4();
@@ -108,6 +157,9 @@ int main(void) {
 
   cout << endl << "Task6a!" << endl;
   task6a();
+
+  cout << endl << "Task7!" << endl;
+  task7();
 
   return 0;
 }
