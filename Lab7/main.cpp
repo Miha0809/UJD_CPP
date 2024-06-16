@@ -313,6 +313,37 @@ void task15(void) {
        << "-th element of the array (non-zero): " << result << endl;
 }
 
+void convertSeconds(int inputSeconds, int &days, int &hours, int &minutes,
+                    int &seconds) {
+  const int SECONDS_IN_DAY = 86400;
+  const int SECONDS_IN_HOUR = 3600;
+  const int SECONDS_IN_MINUTE = 60;
+
+  days = inputSeconds / SECONDS_IN_DAY;
+  inputSeconds %= SECONDS_IN_DAY;
+
+  hours = inputSeconds / SECONDS_IN_HOUR;
+  inputSeconds %= SECONDS_IN_HOUR;
+
+  minutes = inputSeconds / SECONDS_IN_MINUTE;
+  seconds = inputSeconds % SECONDS_IN_MINUTE;
+}
+void task16(void) {
+  int totalSeconds;
+  int days, hours, minutes, seconds;
+
+  cout << "Enter the number of seconds: ";
+  cin >> totalSeconds;
+
+  convertSeconds(totalSeconds, days, hours, minutes, seconds);
+
+  cout << totalSeconds << " seconds is equivalent to:\n";
+  cout << "Days: " << days << endl;
+  cout << "Hours: " << hours << endl;
+  cout << "Minutes: " << minutes << endl;
+  cout << "Seconds: " << seconds << endl;
+}
+
 int main(void) {
   cout << endl << "Task4!" << endl;
   task4();
@@ -343,6 +374,9 @@ int main(void) {
 
   cout << endl << "Task15!" << endl;
   task15();
+
+  cout << endl << "Task16!" << endl;
+  task16();
 
   return 0;
 }
