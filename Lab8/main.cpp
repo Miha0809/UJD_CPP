@@ -134,6 +134,42 @@ void task5(char *argv[]) {
   delete[] lines;
 }
 
+void writeSquaresToFile(const string &filename) {
+  ofstream file(filename);
+
+  if (!file.is_open()) {
+    cout << "Error opening file: " << filename << endl;
+    return;
+  }
+
+  for (int i = 1; i <= 10; ++i) {
+    file << i * i << endl;
+  }
+
+  file.close();
+}
+void readAndDisplayFile(const string &filename) {
+  ifstream file(filename);
+
+  if (!file.is_open()) {
+    cout << "Error opening file: " << filename << endl;
+    return;
+  }
+
+  int number;
+  while (file >> number) {
+    cout << number << endl;
+  }
+
+  file.close();
+}
+void task6() {
+  const string filename = "squares.txt";
+
+  writeSquaresToFile(filename);
+  readAndDisplayFile(filename);
+}
+
 int main(int argc, char *argv[]) {
   if (argc != 2) {
     cout << "Usage: " << argv[0] << " <filename>" << endl;
@@ -151,6 +187,9 @@ int main(int argc, char *argv[]) {
 
   cout << endl << "Task5!" << endl;
   task5(argv);
+
+  cout << endl << "Task6!" << endl;
+  task6();
 
   return 0;
 }
