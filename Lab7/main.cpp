@@ -372,6 +372,24 @@ void task13(void) {
   cout << "num1 = " << num1 << ", num2 = " << num2 << endl;
 }
 
+int *allocateMemory() { return new int; }
+int *allocateAndInitialize(int value) {
+  int *ptr = new int;
+  *ptr = value;
+  return ptr;
+}
+void task14(void) {
+  int *ptr1 = allocateMemory();
+  *ptr1 = 42;
+  cout << "Value allocated using allocateMemory(): " << *ptr1 << endl;
+  delete ptr1;
+
+  int *ptr2 = allocateAndInitialize(99);
+  cout << "Value allocated and initialized using allocateAndInitialize(): "
+       << *ptr2 << endl;
+  delete ptr2;
+}
+
 int function(int i, int array[], int n) {
   int count = 0;
   for (int j = 0; j < n; ++j) {
@@ -616,6 +634,9 @@ int main(void) {
 
   cout << endl << "Task13!" << endl;
   task13();
+
+  cout << endl << "Task14!" << endl;
+  task14();
 
   cout << endl << "Task15!" << endl;
   task15();
