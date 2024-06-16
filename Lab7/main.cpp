@@ -192,6 +192,73 @@ void task8a(void) {
   }
 }
 
+enum BitMask {
+  BIT0 = 0x1,  // 0001
+  BIT1 = 0x2,  // 0010
+  BIT2 = 0x4,  // 0100
+  BIT3 = 0x8,  // 1000
+  BIT4 = 0x10, // 0001 0000
+  BIT5 = 0x20, // 0010 0000
+  BIT6 = 0x40, // 0100 0000
+  BIT7 = 0x80  // 1000 0000
+};
+void decToBin(unsigned int num) {
+  for (int bit = sizeof(num) * 8 - 1; bit >= 0; --bit) {
+    cout << ((num >> bit) & 1);
+  }
+  cout << endl;
+}
+int setBit(int &word, int bitNumber) {
+  if (bitNumber < 0 || bitNumber >= sizeof(int) * 8) {
+    return -3;
+  }
+
+  if (word < 0) {
+    return -1;
+  }
+
+  word |= (1 << bitNumber);
+
+  return 0;
+}
+int clearBit(int &word, int bitNumber) {
+  if (bitNumber < 0 || bitNumber >= sizeof(int) * 8) {
+    return -3;
+  }
+
+  if (word < 0) {
+    return -1;
+  }
+
+  word &= ~(1 << bitNumber);
+
+  return 0;
+}
+void task10(void) {
+  int word = 13;
+
+  cout << "Original value in binary: ";
+  decToBin(word);
+
+  int setResult = setBit(word, 2);
+
+  if (setResult == 0) {
+    cout << "After setting bit 2, value in binary: ";
+    decToBin(word);
+  } else {
+    cout << "Error setting bit: " << setResult << endl;
+  }
+
+  int clearResult = clearBit(word, 3);
+
+  if (clearResult == 0) {
+    cout << "After clearing bit 3, value in binary: ";
+    decToBin(word);
+  } else {
+    cout << "Error clearing bit: " << clearResult << endl;
+  }
+}
+
 int main(void) {
   cout << endl << "Task4!" << endl;
   task4();
@@ -210,6 +277,12 @@ int main(void) {
 
   cout << endl << "Task8!" << endl;
   task8();
+
+  cout << endl << "Task8a!" << endl;
+  task8a();
+
+  cout << endl << "Task10!" << endl;
+  task10();
 
   return 0;
 }
