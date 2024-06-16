@@ -490,6 +490,120 @@ void task9(int argc, char *argv[]) {
   copyFileCpp(srcPath, destPath, option);
 }
 
+void writeArrayToBinaryFileC(const char *filename, int **array, int n, int m) {
+  ofstream file(filename, ios::binary);
+
+  if (!file.is_open()) {
+    cout << "Error opening file: " << filename << endl;
+    return;
+  }
+
+  file.write(reinterpret_cast<const char *>(&n), sizeof(int));
+  file.write(reinterpret_cast<const char *>(&m), sizeof(int));
+
+  for (int i = 0; i < n; ++i) {
+    for (int j = 0; j < m; ++j) {
+      file.write(reinterpret_cast<const char *>(&array[i][j]), sizeof(int));
+    }
+  }
+
+  file.close();
+}
+void readArrayFromBinaryFileC(const char *filename) {
+  ifstream file(filename, ios::binary);
+
+  if (!file.is_open()) {
+    cout << "Error opening file: " << filename << endl;
+    return;
+  }
+
+  int n, m;
+  file.read(reinterpret_cast<char *>(&n), sizeof(int));
+  file.read(reinterpret_cast<char *>(&m), sizeof(int));
+
+  cout << "Array read from file:" << endl;
+  for (int i = 0; i < n; ++i) {
+    for (int j = 0; j < m; ++j) {
+      int value;
+      file.read(reinterpret_cast<char *>(&value), sizeof(int));
+      cout << value << "\t";
+    }
+    cout << endl;
+  }
+
+  file.close();
+}
+void writeArrayToBinaryFileCpp(const string &filename, int **array, int n,
+                               int m) {
+  ofstream file(filename, ios::binary);
+
+  if (!file.is_open()) {
+    cout << "Error opening file: " << filename << endl;
+    return;
+  }
+
+  file.write(reinterpret_cast<const char *>(&n), sizeof(int));
+  file.write(reinterpret_cast<const char *>(&m), sizeof(int));
+
+  for (int i = 0; i < n; ++i) {
+    for (int j = 0; j < m; ++j) {
+      file.write(reinterpret_cast<const char *>(&array[i][j]), sizeof(int));
+    }
+  }
+
+  file.close();
+}
+void readArrayFromBinaryFileCpp(const string &filename) {
+  ifstream file(filename, ios::binary);
+
+  if (!file.is_open()) {
+    cout << "Error opening file: " << filename << endl;
+    return;
+  }
+
+  int n, m;
+  file.read(reinterpret_cast<char *>(&n), sizeof(int));
+  file.read(reinterpret_cast<char *>(&m), sizeof(int));
+
+  cout << "Array read from file:" << endl;
+  for (int i = 0; i < n; ++i) {
+    for (int j = 0; j < m; ++j) {
+      int value;
+      file.read(reinterpret_cast<char *>(&value), sizeof(int));
+      cout << value << "\t";
+    }
+    cout << endl;
+  }
+
+  file.close();
+}
+void task10() {
+  const char *filenameC = "array_data_c.bin";
+  const string filenameCpp = "array_data_cpp.bin";
+  const int n = 10;
+  const int m = 10;
+
+  int **array = new int *[n];
+  for (int i = 0; i < n; ++i) {
+    array[i] = new int[m];
+    for (int j = 0; j < m; ++j) {
+      array[i][j] = (i + 1) * (j + 1);
+    }
+  }
+
+  writeArrayToBinaryFileC(filenameC, array, n, m);
+  readArrayFromBinaryFileC(filenameC);
+
+  writeArrayToBinaryFileCpp(filenameCpp, array, n, m);
+  readArrayFromBinaryFileCpp(filenameCpp);
+
+  for (int i = 0; i < n; ++i) {
+    delete[] array[i];
+  }
+
+  delete[] array;
+}
+
 int main(int argc, char *argv[]) {
   if (argc != 2) {
     cout << "Usage: " << argv[0] << " <filename>" << endl;
@@ -519,6 +633,9 @@ int main(int argc, char *argv[]) {
 
   cout << endl << "Task9!" << endl;
   task9(argc, argv);
+
+  cout << endl << "Task10!" << endl;
+  task10();
 
   return 0;
 }
