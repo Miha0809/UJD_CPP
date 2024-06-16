@@ -413,6 +413,29 @@ void task15(void) {
        << "-th element of the array (non-zero): " << result << endl;
 }
 
+int *allocateAndFill(int n) {
+  int *block = new int[n];
+  for (int i = 0; i < n; ++i) {
+    block[i] = i + 1;
+  }
+  return block;
+}
+void task15_2(void) {
+  int n;
+  cout << "Enter the number of integers to allocate: ";
+  cin >> n;
+
+  int *block = allocateAndFill(n);
+
+  cout << "Contents of the allocated block:" << endl;
+  for (int i = 0; i < n; ++i) {
+    cout << block[i] << " ";
+  }
+  cout << endl;
+
+  delete[] block;
+}
+
 void convertSeconds(int inputSeconds, int &days, int &hours, int &minutes,
                     int &seconds) {
   const int SECONDS_IN_DAY = 86400;
@@ -640,6 +663,9 @@ int main(void) {
 
   cout << endl << "Task15!" << endl;
   task15();
+
+  cout << endl << "Task15_2!" << endl;
+  task15_2();
 
   cout << endl << "Task16!" << endl;
   task16();
