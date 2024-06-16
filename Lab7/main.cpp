@@ -170,6 +170,28 @@ void task8(void) {
   }
 }
 
+int findValue(const int array[], int size, int value) {
+  for (int i = 0; i < size; ++i) {
+    if (array[i] == value) {
+      return i;
+    }
+  }
+  return -1;
+}
+void task8a(void) {
+  int array[] = {2, 5, 7, 1, 4};
+  int size = sizeof(array) / sizeof(array[0]);
+
+  int valueToFind = 7;
+  int index = findValue(array, size, valueToFind);
+
+  if (index != -1) {
+    cout << "Value " << valueToFind << " found at index " << index << endl;
+  } else {
+    cout << "Value " << valueToFind << " not found in the array." << endl;
+  }
+}
+
 int main(void) {
   cout << endl << "Task4!" << endl;
   task4();
