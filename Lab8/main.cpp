@@ -101,6 +101,39 @@ void task4(char *argv[]) {
   cout << "Maximum length of lines: " << maxLength << endl;
 }
 
+void task5(char *argv[]) {
+  ifstream file(argv[1]);
+
+  if (!file.is_open()) {
+    cout << "Error opening file: " << argv[1] << endl;
+    return;
+  }
+
+  string line;
+  string *lines = nullptr;
+  int lineCount = 0;
+
+  while (getline(file, line)) {
+    string *temp = new string[lineCount + 1];
+    for (int i = 0; i < lineCount; ++i) {
+      temp[i] = lines[i];
+    }
+    temp[lineCount] = line;
+    delete[] lines;
+    lines = temp;
+    ++lineCount;
+  }
+
+  file.close();
+
+  cout << "Lines read from file:" << endl;
+  for (int i = 0; i < lineCount; ++i) {
+    cout << lines[i] << endl;
+  }
+
+  delete[] lines;
+}
+
 int main(int argc, char *argv[]) {
   if (argc != 2) {
     cout << "Usage: " << argv[0] << " <filename>" << endl;
@@ -115,6 +148,9 @@ int main(int argc, char *argv[]) {
 
   cout << endl << "Task4!" << endl;
   task4(argv);
+
+  cout << endl << "Task5!" << endl;
+  task5(argv);
 
   return 0;
 }
