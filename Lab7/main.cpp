@@ -1,4 +1,5 @@
 #include <cmath>
+#include <cstring>
 #include <iostream>
 
 using namespace std;
@@ -55,6 +56,14 @@ void task5(void) {
   a = 3;
   b = 9;
   cout << "Porównanie a i b: " << compare(a, b) << endl;
+}
+
+int textLength(const char *text) { return strlen(text); }
+void task5a(void) {
+  const char *message = "Hello, World!";
+  int length = textLength(message);
+
+  cout << "Length of the text \"" << message << "\" is: " << length << endl;
 }
 
 long int squareByValue(long int num) { return num * num; }
@@ -524,6 +533,9 @@ int main(void) {
 
   cout << endl << "Task5!" << endl;
   task5();
+
+  cout << endl << "Task5a!" << endl;
+  task5a();
 
   cout << endl << "Task6!" << endl;
   task6();
