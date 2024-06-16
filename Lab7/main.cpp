@@ -386,6 +386,23 @@ void task19(void) {
   cout << "Effective length of the string: " << effectiveLength << endl;
 }
 
+int isLeapYear(int year) {
+  if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) {
+    return 1;
+  } else {
+    return 0;
+  }
+}
+void task20(void) {
+  int year;
+  cout << "Enter a year: ";
+  cin >> year;
+
+  int leapYear = isLeapYear(year);
+
+  cout << "Is " << year << " a leap year? " << leapYear << endl;
+}
+
 int main(void) {
   cout << endl << "Task4!" << endl;
   task4();
@@ -425,6 +442,9 @@ int main(void) {
 
   cout << endl << "Task19!" << endl;
   task19();
+
+  cout << endl << "Task20!" << endl;
+  task20();
 
   return 0;
 }
