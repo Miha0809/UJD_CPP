@@ -1,3 +1,4 @@
+#include <cmath>
 #include <iostream>
 
 using namespace std;
@@ -145,6 +146,30 @@ void task7(void) {
   }
 }
 
+double square(double x) { return x * x; }
+double hypotenuse(double a, double b) {
+  if (a <= 0 || b <= 0) {
+    return -1;
+  }
+  return sqrt(square(a) + square(b));
+}
+void task8(void) {
+  double side1, side2;
+
+  cout << "Enter the length of the first side of the right triangle: ";
+  cin >> side1;
+  cout << "Enter the length of the second side of the right triangle: ";
+  cin >> side2;
+
+  double hyp = hypotenuse(side1, side2);
+
+  if (hyp == -1) {
+    cout << "The lengths entered are invalid (zero or negative)." << endl;
+  } else {
+    cout << "The length of the hypotenuse is: " << hyp << endl;
+  }
+}
+
 int main(void) {
   cout << endl << "Task4!" << endl;
   task4();
@@ -160,6 +185,9 @@ int main(void) {
 
   cout << endl << "Task7!" << endl;
   task7();
+
+  cout << endl << "Task8!" << endl;
+  task8();
 
   return 0;
 }
