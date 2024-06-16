@@ -319,6 +319,59 @@ void task12(void) {
        << " w tablicy: " << iloscWystapien << endl;
 }
 
+void swapPointers(int *ptr1, int *ptr2) {
+  int temp = *ptr1;
+  *ptr1 = *ptr2;
+  *ptr2 = temp;
+}
+void swapReferences(int &ref1, int &ref2) {
+  int temp = ref1;
+  ref1 = ref2;
+  ref2 = temp;
+}
+void swapPointerAndReference(int *ptr, int &ref) {
+  int temp = *ptr;
+  *ptr = ref;
+  ref = temp;
+}
+void task13(void) {
+  int num1 = 10, num2 = 20;
+  int *ptr1 = &num1;
+  int *ptr2 = &num2;
+
+  cout << "Before swapping using pointers:\n";
+  cout << "num1 = " << num1 << ", num2 = " << num2 << endl;
+
+  swapPointers(ptr1, ptr2);
+
+  cout << "After swapping using pointers:\n";
+  cout << "num1 = " << num1 << ", num2 = " << num2 << endl;
+
+  cout << "\nResetting values for swapping using references:\n";
+  num1 = 10;
+  num2 = 20;
+
+  cout << "Before swapping using references:\n";
+  cout << "num1 = " << num1 << ", num2 = " << num2 << endl;
+
+  swapReferences(num1, num2);
+
+  cout << "After swapping using references:\n";
+  cout << "num1 = " << num1 << ", num2 = " << num2 << endl;
+
+  cout << "\nResetting values for swapping pointer and reference:\n";
+  num1 = 10;
+  num2 = 20;
+
+  cout << "Before swapping pointer and reference:\n";
+  cout << "num1 = " << num1 << ", num2 = " << num2 << endl;
+
+  swapPointerAndReference(&num1, num2);
+
+  cout << "After swapping pointer and reference:\n";
+  cout << "num1 = " << num1 << ", num2 = " << num2 << endl;
+}
+
 int function(int i, int array[], int n) {
   int count = 0;
   for (int j = 0; j < n; ++j) {
@@ -560,6 +613,9 @@ int main(void) {
 
   cout << endl << "Task12!" << endl;
   task12();
+
+  cout << endl << "Task13!" << endl;
+  task13();
 
   cout << endl << "Task15!" << endl;
   task15();
