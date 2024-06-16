@@ -2,6 +2,7 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <unordered_map>
 
 using namespace std;
 
@@ -604,8 +605,49 @@ void task10() {
   delete[] array;
 }
 
+void characterStatistics(const char *filename, const char *characters) {
+  unordered_map<char, int> charCount;
+
+  for (int i = 0; i < strlen(characters); ++i) {
+    if (charCount.find(characters[i]) == charCount.end()) {
+      charCount[characters[i]] = 0;
+    }
+  }
+
+  ifstream file(filename);
+  if (!file.is_open()) {
+    cout << "Error opening file: " << filename << endl;
+    return;
+  }
+
+  char ch;
+  while (file >> noskipws >> ch) {
+    if (charCount.find(ch) != charCount.end()) {
+      charCount[ch]++;
+    }
+  }
+
+  file.close();
+
+  for (int i = 0; i < strlen(characters); ++i) {
+    cout << "Character '" << characters[i]
+         << "' count: " << charCount[characters[i]] << endl;
+  }
+}
+void task11(int argc, char *argv[]) {
+  if (argc < 3) {
+    cout << "Usage: " << argv[0] << " <filename> <characters>" << endl;
+    return;
+  }
+
+  const char *filename = argv[1];
+  const char *characters = argv[2];
+
+  characterStatistics(filename, characters);
+}
+
 int main(int argc, char *argv[]) {
-  if (argc != 2) {
+  if (argc < 2) {
     cout << "Usage: " << argv[0] << " <filename>" << endl;
     return 1;
   }
@@ -636,6 +678,9 @@ int main(int argc, char *argv[]) {
 
   cout << endl << "Task10!" << endl;
   task10();
+
+  cout << endl << "Task11!" << endl;
+  task11(argc, argv);
 
   return 0;
 }
