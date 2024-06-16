@@ -259,6 +259,37 @@ void task10(void) {
   }
 }
 
+void lostab(int t[], int size, int n) {
+  srand(time(NULL));
+
+  for (int i = 0; i < size; ++i) {
+    t[i] = rand() % (n + 1);
+  }
+}
+int znajdzN(int t[], int size, int n) {
+  int count = 0;
+
+  for (int i = 0; i < size; ++i) {
+    if (t[i] == n) {
+      count++;
+    }
+  }
+
+  return count;
+}
+void task12(void) {
+  const int SIZE = 10;
+  int tablica[SIZE];
+
+  lostab(tablica, SIZE, 5);
+
+  int liczbaN = 5;
+  int iloscWystapien = znajdzN(tablica, SIZE, liczbaN);
+
+  cout << "Liczba wystąpień liczby " << liczbaN
+       << " w tablicy: " << iloscWystapien << endl;
+}
+
 int main(void) {
   cout << endl << "Task4!" << endl;
   task4();
@@ -283,6 +314,9 @@ int main(void) {
 
   cout << endl << "Task10!" << endl;
   task10();
+
+  cout << endl << "Task12!" << endl;
+  task12();
 
   return 0;
 }
