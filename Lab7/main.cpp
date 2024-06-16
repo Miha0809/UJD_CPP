@@ -563,6 +563,34 @@ void task20(void) {
   cout << "Is " << year << " a leap year? " << leapYear << endl;
 }
 
+void fillArray(int size, int array[]) {
+  for (int i = 0; i < size; ++i) {
+    array[i] = i;
+  }
+}
+void copyArray(int *arr1, int *arr2, int size) {
+  for (int i = 0; i < size; ++i) {
+    arr2[i] = arr1[i];
+  }
+}
+void displayArray(int size, int arr[]) {
+  cout << "Array elements:" << endl;
+  for (int i = 0; i < size; ++i) {
+    cout << arr[i] << " ";
+  }
+  cout << endl;
+}
+void task20_2(void) {
+  const int size = 5;
+  int array1[size];
+  int array2[size];
+
+  fillArray(size, array1);
+  displayArray(size, array1);
+  copyArray(array1, array2, size);
+  displayArray(size, array2);
+}
+
 int hexToDecimal(string hex) {
   int decimal = 0;
   int power = 0;
@@ -591,6 +619,48 @@ void task21(void) {
 
   cout << "Decimal equivalent of " << hexNumber << " is: " << decimalNumber
        << endl;
+}
+
+void shiftArray(int array[], int size, int direction = 1, int steps = 1) {
+  if (direction == 1) {
+    for (int i = 0; i < steps; ++i) {
+      int last = array[size - 1];
+      for (int j = size - 1; j > 0; --j) {
+        array[j] = array[j - 1];
+      }
+      array[0] = last;
+    }
+  } else if (direction == -1) {
+    for (int i = 0; i < steps; ++i) {
+      int first = array[0];
+      for (int j = 0; j < size - 1; ++j) {
+        array[j] = array[j + 1];
+      }
+      array[size - 1] = first;
+    }
+  }
+}
+void displayArray(int array[], int size) {
+  cout << "Array elements:" << endl;
+  for (int i = 0; i < size; ++i) {
+    cout << array[i] << " ";
+  }
+  cout << endl;
+}
+void task21_2(void) {
+  const int size = 5;
+  int arr[size] = {1, 2, 3, 4, 5};
+
+  displayArray(arr, size);
+
+  shiftArray(arr, size);
+  displayArray(arr, size);
+
+  shiftArray(arr, size, -1);
+  displayArray(arr, size);
+
+  shiftArray(arr, size, 1, 2);
+  displayArray(arr, size);
 }
 
 void calculate(int a, int b, int *sum, int *product) {
@@ -719,8 +789,14 @@ int main(void) {
   cout << endl << "Task20!" << endl;
   task20();
 
+  cout << endl << "Task20_2!" << endl;
+  task20_2();
+
   cout << endl << "Task21!" << endl;
   task21();
+
+  cout << endl << "Task21_2!" << endl;
+  task21_2();
 
   cout << endl << "Task24!" << endl;
   task24();
