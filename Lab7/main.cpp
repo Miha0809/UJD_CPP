@@ -290,6 +290,29 @@ void task12(void) {
        << " w tablicy: " << iloscWystapien << endl;
 }
 
+int function(int i, int array[], int n) {
+  int count = 0;
+  for (int j = 0; j < n; ++j) {
+    if (array[j] != 0) {
+      count++;
+      if (count == i) {
+        return array[j];
+      }
+    }
+  }
+  return 0;
+}
+void task15(void) {
+  int array[] = {0, 3, 0, 5, 0, 7};
+  int n = sizeof(array) / sizeof(array[0]);
+  int i = 2;
+
+  int result = function(i, array, n);
+
+  cout << "Value of the " << i
+       << "-th element of the array (non-zero): " << result << endl;
+}
+
 int main(void) {
   cout << endl << "Task4!" << endl;
   task4();
@@ -317,6 +340,9 @@ int main(void) {
 
   cout << endl << "Task12!" << endl;
   task12();
+
+  cout << endl << "Task15!" << endl;
+  task15();
 
   return 0;
 }
