@@ -364,6 +364,28 @@ void task18(void) {
        << endl;
 }
 
+int calculateEffectiveLength(const string &str) {
+  int length = 0;
+
+  for (char ch : str) {
+    if (!isspace(ch)) {
+      length++;
+    }
+  }
+
+  return length;
+}
+void task19(void) {
+  string inputString;
+
+  cout << "Enter a string: ";
+  cin >> inputString;
+
+  int effectiveLength = calculateEffectiveLength(inputString);
+
+  cout << "Effective length of the string: " << effectiveLength << endl;
+}
+
 int main(void) {
   cout << endl << "Task4!" << endl;
   task4();
@@ -400,6 +422,9 @@ int main(void) {
 
   cout << endl << "Task18!" << endl;
   task18();
+
+  cout << endl << "Task19!" << endl;
+  task19();
 
   return 0;
 }
