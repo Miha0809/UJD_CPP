@@ -433,6 +433,46 @@ void task21(void) {
        << endl;
 }
 
+void symmetry(int array[], int size, int *&first, int *&last, bool &found,
+              int &symmetricIndex, int &symmetricValue) {
+  found = false;
+  symmetricIndex = -1;
+
+  for (int i = 0; i < size / 2; ++i) {
+    if (array[i] == array[size - 1 - i]) {
+      found = true;
+      symmetricIndex = i;
+      symmetricValue = array[i];
+      first = &array[i];
+      last = &array[size - 1 - i];
+      return;
+    }
+  }
+}
+void task27(void) {
+  const int size = 8;
+  int arr[size] = {1, 2, 3, 4, 4, 3, 2, 1};
+
+  int *firstPtr;
+  int *lastPtr;
+  bool symmetryFound;
+  int symIndex;
+  int symValue;
+
+  symmetry(arr, size, firstPtr, lastPtr, symmetryFound, symIndex, symValue);
+
+  if (symmetryFound) {
+    cout << "Symmetry found!\n";
+    cout << "First value: " << *firstPtr << " at index " << firstPtr - arr
+         << endl;
+    cout << "Last value: " << *lastPtr << " at index " << lastPtr - arr << endl;
+    cout << "Symmetric index: " << symIndex << " with value: " << symValue
+         << endl;
+  } else {
+    cout << "No symmetry found in the array.\n";
+  }
+}
+
 int main(void) {
   cout << endl << "Task4!" << endl;
   task4();
@@ -478,6 +518,9 @@ int main(void) {
 
   cout << endl << "Task21!" << endl;
   task21();
+
+  cout << endl << "Task27!" << endl;
+  task27();
 
   return 0;
 }
