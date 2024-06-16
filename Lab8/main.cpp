@@ -8,7 +8,7 @@ void task1(char *argv[]) {
   ifstream file(argv[1]);
 
   if (!file) {
-    cerr << "Error opening file: " << argv[1] << endl;
+    cout << "Error opening file: " << argv[1] << endl;
     return;
   }
 
@@ -31,7 +31,7 @@ void task2(char *argv[]) {
   ifstream file(argv[1]);
 
   if (!file) {
-    cerr << "Error opening file: " << argv[1] << endl;
+    cout << "Error opening file: " << argv[1] << endl;
     return;
   }
 
@@ -76,6 +76,31 @@ void task2(char *argv[]) {
   cout << "Number of words: " << wordCount << endl;
 }
 
+void task4(char *argv[]) {
+  ifstream file(argv[1]);
+
+  if (!file.is_open()) {
+    cout << "Error opening file: " << argv[1] << endl;
+    return;
+  }
+
+  int lineCount = 0;
+  int maxLength = 0;
+  string line;
+
+  while (getline(file, line)) {
+    ++lineCount;
+    if (line.length() > maxLength) {
+      maxLength = line.length();
+    }
+  }
+
+  file.close();
+
+  cout << "Number of lines: " << lineCount << endl;
+  cout << "Maximum length of lines: " << maxLength << endl;
+}
+
 int main(int argc, char *argv[]) {
   if (argc != 2) {
     cout << "Usage: " << argv[0] << " <filename>" << endl;
@@ -87,6 +112,9 @@ int main(int argc, char *argv[]) {
 
   cout << endl << "Task2!" << endl;
   task2(argv);
+
+  cout << endl << "Task4!" << endl;
+  task4(argv);
 
   return 0;
 }
