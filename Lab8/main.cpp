@@ -170,6 +170,132 @@ void task6() {
   readAndDisplayFile(filename);
 }
 
+void displayNonWhitespaceChars(const string &filepath) {
+  ifstream file(filepath);
+
+  if (!file.is_open()) {
+    cout << "Error opening file: " << filepath << endl;
+    return;
+  }
+
+  char ch;
+  while (file.get(ch)) {
+    if (!isspace(ch)) {
+      cout << ch;
+    }
+  }
+
+  file.close();
+}
+int compareFiles(const string &filepath1, const string &filepath2) {
+  ifstream file1(filepath1);
+  ifstream file2(filepath2);
+
+  if (!file1.is_open() || !file2.is_open()) {
+    cout << "Error opening files." << endl;
+    return -1;
+  }
+
+  char ch1, ch2;
+  while (file1.get(ch1) && file2.get(ch2)) {
+    if (ch1 != ch2) {
+      file1.close();
+      file2.close();
+      return 0;
+    }
+  }
+
+  if (!file1.eof() || !file2.eof()) {
+    file1.close();
+    file2.close();
+    return 0;
+  }
+
+  file1.close();
+  file2.close();
+  return 1;
+}
+int appendToEnd(const string &filepath) {
+  ofstream file(filepath, ios::app);
+
+  if (!file.is_open()) {
+    cout << "Error opening file: " << filepath << endl;
+    return -1;
+  }
+
+  file << "Hello, world!" << endl;
+
+  file.close();
+  return 0;
+}
+int replaceBegin(const string &filepath) {
+  fstream file(filepath, ios::out | ios::in);
+
+  if (!file.is_open()) {
+    cout << "Error opening file: " << filepath << endl;
+    return -1;
+  }
+
+  file.seekp(0);
+  file << "Goodbye, world!" << endl;
+
+  file.close();
+  return 0;
+}
+int writeNLinesToFile(int fd, int n) {
+  ofstream file;
+  file.open(to_string(fd) + ".txt", ios::out);
+
+  if (!file.is_open()) {
+    cout << "Error opening file." << endl;
+    return -1;
+  }
+
+  cout << "Enter " << n << " lines:" << endl;
+  string line;
+  for (int i = 0; i < n; ++i) {
+    getline(cin, line);
+    file << line << endl;
+  }
+
+  file.close();
+  return 0;
+}
+void task7() {
+  displayNonWhitespaceChars("test.txt");
+  cout << endl;
+
+  int result = compareFiles("file1.txt", "file2.txt");
+  if (result == 1) {
+    cout << "Files are identical." << endl;
+  } else if (result == 0) {
+    cout << "Files are different." << endl;
+  } else {
+    cout << "Error comparing files." << endl;
+  }
+
+  int fd = appendToEnd("append.txt");
+  if (fd == 0) {
+    cout << "Data appended successfully." << endl;
+  } else {
+    cout << "Error appending data." << endl;
+  }
+
+  fd = replaceBegin("replace.txt");
+  if (fd == 0) {
+    cout << "Data replaced successfully." << endl;
+  } else {
+    cout << "Error replacing data." << endl;
+  }
+
+  int fd_result = writeNLinesToFile(1234, 3);
+  if (fd_result == 0) {
+    cout << "Lines written successfully." << endl;
+  } else {
+    cout << "Error writing lines to file." << endl;
+  }
+}
+
 int main(int argc, char *argv[]) {
   if (argc != 2) {
     cout << "Usage: " << argv[0] << " <filename>" << endl;
@@ -190,6 +316,9 @@ int main(int argc, char *argv[]) {
 
   cout << endl << "Task6!" << endl;
   task6();
+
+  cout << endl << "Task7!" << endl;
+  task7();
 
   return 0;
 }
