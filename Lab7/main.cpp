@@ -467,6 +467,43 @@ void task16(void) {
   cout << "Seconds: " << seconds << endl;
 }
 
+void copyConstantToVariable(const int *constPtr, int *varPtr) {
+  *varPtr = *constPtr;
+}
+void copyConstantToVariable(const int *const constPtr, const int *varPtr) {
+  *const_cast<int *>(varPtr) = *constPtr;
+}
+void task16_2(void) {
+  int constantValue = 10;
+  int variableValue = 0;
+
+  const int *ptrToConstant = &constantValue;
+  int *ptrToVariable = &variableValue;
+
+  cout << "Before calling copyConstantToVariable function:" << endl;
+  cout << "constantValue: " << constantValue << endl;
+  cout << "variableValue: " << variableValue << endl;
+
+  copyConstantToVariable(ptrToConstant, ptrToVariable);
+
+  cout << "\nAfter calling copyConstantToVariable function:" << endl;
+  cout << "constantValue: " << constantValue << endl;
+  cout << "variableValue: " << variableValue << endl;
+
+  constantValue = 20;
+
+  cout << "\nAfter updating constantValue:" << endl;
+  cout << "constantValue: " << constantValue << endl;
+  cout << "variableValue: " << variableValue << endl;
+
+  int newValue = 30;
+  ptrToVariable = &newValue;
+
+  cout << "\nAfter changing ptrToVariable to point to newValue:" << endl;
+  cout << "constantValue: " << constantValue << endl;
+  cout << "variableValue: " << variableValue << endl;
+}
+
 int countBits(int number) {
   int count = 0;
   while (number > 0) {
@@ -669,6 +706,9 @@ int main(void) {
 
   cout << endl << "Task16!" << endl;
   task16();
+
+  cout << endl << "Task16_2!" << endl;
+  task16_2();
 
   cout << endl << "Task18!" << endl;
   task18();
