@@ -296,6 +296,104 @@ void task7() {
   }
 }
 
+void copyFileC(FILE *src, FILE *dest, const char *option) {
+  const int BUFFER_SIZE = 1024;
+  char buffer[BUFFER_SIZE];
+  size_t fileSize = 0;
+  size_t bytesRead = 0;
+  int progress = 0;
+
+  fseek(src, 0, SEEK_END);
+  fileSize = ftell(src);
+  fseek(src, 0, SEEK_SET);
+
+  while (!feof(src)) {
+    bytesRead = fread(buffer, 1, BUFFER_SIZE, src);
+    fwrite(buffer, 1, bytesRead, dest);
+
+    if (strcmp(option, "-p") == 0) {
+      progress = ftell(src) * 100 / fileSize;
+      cout << "Progress: " << progress << "%" << endl;
+    } else if (strcmp(option, "-b") == 0) {
+      cout << "Bytes copied: " << ftell(src) << endl;
+    }
+  }
+}
+
+// C++ style function
+void copyFileCpp(ifstream &src, ofstream &dest, const string &option) {
+  const int BUFFER_SIZE = 1024;
+  char buffer[BUFFER_SIZE];
+  streampos fileSize = 0;
+  streampos bytesRead = 0;
+  int progress = 0;
+
+  src.seekg(0, ios::end);
+  fileSize = src.tellg();
+  src.seekg(0, ios::beg);
+
+  while (!src.eof()) {
+    src.read(buffer, BUFFER_SIZE);
+    bytesRead = src.gcount();
+    dest.write(buffer, bytesRead);
+
+    if (option == "-p") {
+      progress = src.tellg() * 100 / fileSize;
+      cout << "Progress: " << progress << "%" << endl;
+    } else if (option == "-b") {
+      cout << "Bytes copied: " << src.tellg() << endl;
+    }
+  }
+}
+void task8(int argc, char *argv[]) {
+
+  if (argc != 4) {
+    cout << "Usage: " << argv[0]
+         << " <source_file> <destination_file> <-p | -b>" << endl;
+    return;
+  }
+
+  const char *srcFilename = argv[1];
+  const char *destFilename = argv[2];
+  const char *option = argv[3];
+
+  FILE *srcC = fopen(srcFilename, "rb");
+  if (!srcC) {
+    cout << "Error opening source file: " << srcFilename << endl;
+    return;
+  }
+
+  FILE *destC = fopen(destFilename, "wb");
+  if (!destC) {
+    cout << "Error opening destination file: " << destFilename << endl;
+    fclose(srcC);
+    return;
+  }
+
+  copyFileC(srcC, destC, option);
+
+  fclose(srcC);
+  fclose(destC);
+
+  ifstream srcCpp(srcFilename, ios::binary);
+  if (!srcCpp.is_open()) {
+    cout << "Error opening source file: " << srcFilename << endl;
+    return;
+  }
+
+  ofstream destCpp(destFilename, ios::binary);
+  if (!destCpp.is_open()) {
+    cout << "Error opening destination file: " << destFilename << endl;
+    srcCpp.close();
+    return;
+  }
+
+  copyFileCpp(srcCpp, destCpp, argv[3]);
+
+  srcCpp.close();
+  destCpp.close();
+}
+
 int main(int argc, char *argv[]) {
   if (argc != 2) {
     cout << "Usage: " << argv[0] << " <filename>" << endl;
@@ -319,6 +417,9 @@ int main(int argc, char *argv[]) {
 
   cout << endl << "Task7!" << endl;
   task7();
+
+  cout << endl << "Task8!" << endl;
+  task8(argc, argv);
 
   return 0;
 }
