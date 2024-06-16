@@ -344,6 +344,26 @@ void task16(void) {
   cout << "Seconds: " << seconds << endl;
 }
 
+int countBits(int number) {
+  int count = 0;
+  while (number > 0) {
+    count += number & 1;
+    number >>= 1;
+  }
+  return count;
+}
+void task18(void) {
+  int inputNumber;
+
+  cout << "Enter a number: ";
+  cin >> inputNumber;
+
+  int bitsSetToOne = countBits(inputNumber);
+
+  cout << "Number of bits set to 1 in " << inputNumber << ": " << bitsSetToOne
+       << endl;
+}
+
 int main(void) {
   cout << endl << "Task4!" << endl;
   task4();
@@ -377,6 +397,9 @@ int main(void) {
 
   cout << endl << "Task16!" << endl;
   task16();
+
+  cout << endl << "Task18!" << endl;
+  task18();
 
   return 0;
 }
