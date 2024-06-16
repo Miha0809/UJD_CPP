@@ -192,6 +192,26 @@ void task8a(void) {
   }
 }
 
+void modify(int *ptr) {
+  *ptr = 100;
+  ptr = nullptr;
+}
+void task9a(void) {
+  int number = 42;
+  int *ptr = &number;
+
+  cout << "Before calling modify function:\n";
+  cout << "Value at ptr: " << *ptr << endl;
+  cout << "Address stored in ptr: " << ptr << endl;
+
+  modify(ptr);
+
+  cout << "\nAfter calling modify function:\n";
+  cout << "Value at ptr: " << *ptr << endl;
+  cout << "Address stored in ptr: " << ptr << endl;
+  cout << "\nValue of 'number' variable outside function: " << number << endl;
+}
+
 enum BitMask {
   BIT0 = 0x1,  // 0001
   BIT1 = 0x2,  // 0010
@@ -433,6 +453,31 @@ void task21(void) {
        << endl;
 }
 
+void calculate(int a, int b, int *sum, int *product) {
+  *sum = a + b;
+  *product = a * b;
+}
+void task24(void) {
+  int num1, num2, sum, product;
+
+  cout << "Enter two numbers: ";
+  cin >> num1 >> num2;
+
+  calculate(num1, num2, &sum, &product);
+
+  cout << "Sum of " << num1 << " and " << num2 << " is: " << sum << endl;
+  cout << "Product of " << num1 << " and " << num2 << " is: " << product
+       << endl;
+
+  if (num2 != 0) {
+    double quotient = static_cast<double>(num1) / num2;
+    cout << "Quotient of " << num1 << " and " << num2 << " is: " << quotient
+         << endl;
+  } else {
+    cout << "Cannot divide by zero.\n";
+  }
+}
+
 void symmetry(int array[], int size, int *&first, int *&last, bool &found,
               int &symmetricIndex, int &symmetricValue) {
   found = false;
@@ -495,6 +540,9 @@ int main(void) {
   cout << endl << "Task8a!" << endl;
   task8a();
 
+  cout << endl << "Task9a!" << endl;
+  task9a();
+
   cout << endl << "Task10!" << endl;
   task10();
 
@@ -518,6 +566,9 @@ int main(void) {
 
   cout << endl << "Task21!" << endl;
   task21();
+
+  cout << endl << "Task24!" << endl;
+  task24();
 
   cout << endl << "Task27!" << endl;
   task27();
