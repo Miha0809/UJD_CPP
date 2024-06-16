@@ -1,3 +1,4 @@
+#include <cstring>
 #include <fstream>
 #include <iostream>
 #include <string>
@@ -394,6 +395,101 @@ void task8(int argc, char *argv[]) {
   destCpp.close();
 }
 
+void copyFileC(const char *srcPath, const char *destPath, const char *option) {
+  const int BUFFER_SIZE = 1024;
+  char buffer[BUFFER_SIZE];
+  size_t fileSize = 0;
+  size_t bytesRead = 0;
+  int progress = 0;
+
+  FILE *src = fopen(srcPath, "rb");
+  if (!src) {
+    cout << "Error opening source file: " << srcPath << endl;
+    return;
+  }
+
+  FILE *dest = fopen(destPath, "wb");
+  if (!dest) {
+    cout << "Error opening destination file: " << destPath << endl;
+    fclose(src);
+    return;
+  }
+
+  fseek(src, 0, SEEK_END);
+  fileSize = ftell(src);
+  fseek(src, 0, SEEK_SET);
+
+  while (!feof(src)) {
+    bytesRead = fread(buffer, 1, BUFFER_SIZE, src);
+    fwrite(buffer, 1, bytesRead, dest);
+
+    if (strcmp(option, "-p") == 0) {
+      progress = ftell(src) * 100 / fileSize;
+      cout << "Progress: " << progress << "%" << endl;
+    } else if (strcmp(option, "-b") == 0) {
+      cout << "Bytes copied: " << ftell(src) << endl;
+    }
+  }
+
+  fclose(src);
+  fclose(dest);
+}
+void copyFileCpp(const string &srcPath, const string &destPath,
+                 const string &option) {
+  const int BUFFER_SIZE = 1024;
+  char buffer[BUFFER_SIZE];
+  streampos fileSize = 0;
+  streampos bytesRead = 0;
+  int progress = 0;
+
+  ifstream src(srcPath, ios::binary);
+  if (!src.is_open()) {
+    cout << "Error opening source file: " << srcPath << endl;
+    return;
+  }
+
+  ofstream dest(destPath, ios::binary);
+  if (!dest.is_open()) {
+    cout << "Error opening destination file: " << destPath << endl;
+    src.close();
+    return;
+  }
+
+  src.seekg(0, ios::end);
+  fileSize = src.tellg();
+  src.seekg(0, ios::beg);
+
+  while (!src.eof()) {
+    src.read(buffer, BUFFER_SIZE);
+    bytesRead = src.gcount();
+    dest.write(buffer, bytesRead);
+
+    if (option == "-p") {
+      progress = src.tellg() * 100 / fileSize;
+      cout << "Progress: " << progress << "%" << endl;
+    } else if (option == "-b") {
+      cout << "Bytes copied: " << src.tellg() << endl;
+    }
+  }
+
+  src.close();
+  dest.close();
+}
+void task9(int argc, char *argv[]) {
+  if (argc != 4) {
+    cout << "Usage: " << argv[0]
+         << " <source_file> <destination_file> <-p | -b>" << endl;
+    return;
+  }
+
+  const char *srcPath = argv[1];
+  const char *destPath = argv[2];
+  const char *option = argv[3];
+
+  copyFileC(srcPath, destPath, option);
+  copyFileCpp(srcPath, destPath, option);
+}
+
 int main(int argc, char *argv[]) {
   if (argc != 2) {
     cout << "Usage: " << argv[0] << " <filename>" << endl;
@@ -420,6 +516,9 @@ int main(int argc, char *argv[]) {
 
   cout << endl << "Task8!" << endl;
   task8(argc, argv);
+
+  cout << endl << "Task9!" << endl;
+  task9(argc, argv);
 
   return 0;
 }
