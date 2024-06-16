@@ -403,6 +403,36 @@ void task20(void) {
   cout << "Is " << year << " a leap year? " << leapYear << endl;
 }
 
+int hexToDecimal(string hex) {
+  int decimal = 0;
+  int power = 0;
+
+  for (int i = hex.size() - 1; i >= 2; --i) {
+    char digit = hex[i];
+    int value;
+    if (isdigit(digit)) {
+      value = digit - '0';
+    } else {
+      value = toupper(digit) - 'A' + 10;
+    }
+    decimal += value * pow(16, power);
+    ++power;
+  }
+
+  return decimal;
+}
+void task21(void) {
+  string hexNumber;
+
+  cout << "Enter a hexadecimal number (starting with 0x or 0X): ";
+  cin >> hexNumber;
+
+  int decimalNumber = hexToDecimal(hexNumber);
+
+  cout << "Decimal equivalent of " << hexNumber << " is: " << decimalNumber
+       << endl;
+}
+
 int main(void) {
   cout << endl << "Task4!" << endl;
   task4();
@@ -445,6 +475,9 @@ int main(void) {
 
   cout << endl << "Task20!" << endl;
   task20();
+
+  cout << endl << "Task21!" << endl;
+  task21();
 
   return 0;
 }
